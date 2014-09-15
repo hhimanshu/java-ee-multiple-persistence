@@ -5,8 +5,26 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.learner</groupId>
-	<artifactId>persistence</artifactId>
+	<artifactId>multi-persistence</artifactId>
+	<packaging>pom</packaging>
 	<version>1.0-SNAPSHOT</version>
+	<modules>
+		<module>persistence</module>
+	</modules>
 
+	<properties>
+		<javaee-api.version>7.0</javaee-api.version>
+	</properties>
 
+	<dependencies>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>${javaee-api.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<defaultGoal>clean install</defaultGoal>
+	</build>
 </project>
