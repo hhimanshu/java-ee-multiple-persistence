@@ -10,4 +10,16 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>persistence</artifactId>
+
+	<properties>
+		<hibernate-jpa-2.0-api.version>1.0.1.Final</hibernate-jpa-2.0-api.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence</groupId>
+			<artifactId>hibernate-jpa-2.0-api</artifactId>
+			<version>${hibernate-jpa-2.0-api.version}</version>
+		</dependency>
+	</dependencies>
 </project>
