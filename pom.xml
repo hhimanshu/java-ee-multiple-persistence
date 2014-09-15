@@ -14,6 +14,7 @@
 
 	<properties>
 		<javaee-api.version>7.0</javaee-api.version>
+		<jsr305.version>3.0.0</jsr305.version>
 	</properties>
 
 	<dependencies>
@@ -21,6 +22,12 @@
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
 			<version>${javaee-api.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.findbugs</groupId>
+			<artifactId>jsr305</artifactId>
+			<version>${jsr305.version}</version>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 

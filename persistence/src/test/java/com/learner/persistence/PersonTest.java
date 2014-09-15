@@ -6,6 +6,5 @@ public class PersonTest {
 
 	@Test
 	public void testAddPerson() {
-
 	}
 }
