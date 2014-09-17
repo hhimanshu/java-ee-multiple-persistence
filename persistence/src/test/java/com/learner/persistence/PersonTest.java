@@ -26,7 +26,7 @@ public class PersonTest {
 	public void testAddPerson() {
 		final Person person;
 		{
-			person = new Person("Tony", "Stark", 1962, 8, 22);
+			person = new Person("Tony", "Stark");
 			crudService.create(person);
 			jpaRule.changeTransaction();
 		}
@@ -42,7 +42,7 @@ public class PersonTest {
 	public void testDeletePerson() {
 		final Person person;
 		{
-			person = new Person("Tony", "Stark", 1962, 8, 22);
+			person = new Person("Tony", "Stark");
 			crudService.create(person);
 			jpaRule.changeTransaction();
 		}

@@ -13,16 +13,11 @@ public class Person {
 	private long id;
 	private String firstName;
 	private String lastName;
-	private int yearOfBirth;
-	private int monthOfBirth;
-	private int dateOfBirth;
 
-	public Person(@Nonnull final String firstName, @Nonnull final String lastName, final int yearOfBirth, final int monthOfBirth, final int dateOfBirth) {
+
+	public Person(@Nonnull final String firstName, @Nonnull final String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.yearOfBirth = yearOfBirth;
-		this.monthOfBirth = monthOfBirth;
-		this.dateOfBirth = dateOfBirth;
 	}
 
 	public Person() {
@@ -32,15 +27,22 @@ public class Person {
 		return id;
 	}
 
+	@Nonnull
+	public String getFirstName() {
+		return firstName;
+	}
+
+	@Nonnull
+	public String getLastName() {
+		return lastName;
+	}
+
 	@Override
 	public String toString() {
 		return "Person{" +
 				"id=" + id +
 				", firstName='" + firstName + '\'' +
 				", lastName='" + lastName + '\'' +
-				", yearOfBirth=" + yearOfBirth +
-				", monthOfBirth=" + monthOfBirth +
-				", dateOfBirth=" + dateOfBirth +
 				'}';
 	}
 }
