@@ -13,6 +13,7 @@
 
 	<properties>
 		<jaxrs-api.version>3.0.8.Final</jaxrs-api.version>
+		<resteasy-jaxrs.version>3.0.8.Final</resteasy-jaxrs.version>
 	</properties>
 
 	<dependencies>
@@ -25,6 +26,16 @@
 			<groupId>com.learner</groupId>
 			<artifactId>business</artifactId>
 			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>${resteasy-jaxrs.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
 		</dependency>
 	</dependencies>
 </project>
