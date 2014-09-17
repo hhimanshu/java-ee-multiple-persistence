@@ -14,6 +14,8 @@ import org.junit.rules.ExternalResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.learner.persistence.configuration.CrudService;
+
 public class JpaRule extends ExternalResource {
 	private static final Logger LOGGER = LoggerFactory.getLogger(JpaRule.class);
 
@@ -27,6 +29,7 @@ public class JpaRule extends ExternalResource {
 		this.persistenceUnitName = persistenceUnitName;
 	}
 
+	@SuppressWarnings("UnusedDeclaration")
 	public JpaRule(@Nonnull final String persistenceUnitName, @Nonnull final DataSourceDefinition dataSourceDefinition) {
 		this.dataSourceDefinition = dataSourceDefinition;
 		this.persistenceUnitName = persistenceUnitName;
@@ -35,6 +38,10 @@ public class JpaRule extends ExternalResource {
 	public void changeTransaction() {
 		commitOrRollbackTransaction();
 		entityManager.getTransaction().begin();
+	}
+
+	public CrudService createCrudService() {
+		return new CrudService(entityManager);
 	}
 
 	@Override

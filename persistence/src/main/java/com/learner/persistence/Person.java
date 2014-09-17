@@ -25,6 +25,10 @@ public class Person {
 		this.dateOfBirth = dateOfBirth;
 	}
 
+	public long getId() {
+		return id;
+	}
+
 	@Override
 	public String toString() {
 		return "Person{" +
