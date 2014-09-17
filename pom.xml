@@ -15,6 +15,10 @@
 	<properties>
 		<javaee-api.version>7.0</javaee-api.version>
 		<jsr305.version>3.0.0</jsr305.version>
+		<slf4j-api.version>1.7.7</slf4j-api.version>
+		<logback-classic.version>1.1.2</logback-classic.version>
+		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
+		<javac.version>1.8</javac.version>
 	</properties>
 
 	<dependencies>
@@ -29,9 +33,30 @@
 			<version>${jsr305.version}</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j-api.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback-classic.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<defaultGoal>clean install</defaultGoal>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>${javac.version}</source>
+					<target>${javac.version}</target>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>

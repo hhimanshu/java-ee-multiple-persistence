@@ -15,6 +15,8 @@
 		<hibernate-jpa-2.0-api.version>1.0.1.Final</hibernate-jpa-2.0-api.version>
 		<hibernate-core.version>4.3.6.Final</hibernate-core.version>
 		<junit.version>4.11</junit.version>
+		<hibernate-entitymanager.version>4.3.6.Final</hibernate-entitymanager.version>
+		<h2.version>1.4.181</h2.version>
 	</properties>
 
 	<dependencies>
@@ -27,6 +29,18 @@
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate-core.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate-entitymanager.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
