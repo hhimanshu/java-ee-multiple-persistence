@@ -9,7 +9,7 @@ import javax.persistence.PersistenceUnit;
 @Startup
 @Singleton
 public class PersistenceEntityManagerProducer {
-	@PersistenceUnit(name = "earth")
+	@PersistenceUnit(unitName = "earth")
 	private EntityManager entityManager;
 
 	@Produces
