@@ -16,7 +16,6 @@
 		<hibernate-core.version>4.3.6.Final</hibernate-core.version>
 		<junit.version>4.11</junit.version>
 		<hibernate-entitymanager.version>4.3.6.Final</hibernate-entitymanager.version>
-		<h2.version>1.4.181</h2.version>
 	</properties>
 
 	<dependencies>
@@ -40,8 +39,6 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>${h2.version}</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>

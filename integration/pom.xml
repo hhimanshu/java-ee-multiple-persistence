@@ -11,6 +11,14 @@
 
 	<artifactId>integration</artifactId>
 
+	<properties>
+		<maven.cargo.version>1.4.8</maven.cargo.version>
+		<datasource.jndi>java:/jdbc/EarthDS</datasource.jndi>
+		<h2.user>sa</h2.user>
+		<h2.driver>org.h2.Driver</h2.driver>
+		<datasource.url>jdbc:h2:${project.build.directory}/earth</datasource.url>
+	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.learner</groupId>
@@ -21,24 +29,8 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>1.4.180</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derby</artifactId>
-			<version>10.10.2.0</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-	<properties>
-		<maven.cargo.version>1.4.8</maven.cargo.version>
-		<datasource.jndi>java:/jdbc/EarthDS</datasource.jndi>
-		<h2.user>sa</h2.user>
-		<h2.driver>org.h2.Driver</h2.driver>
-		<datasource.url>jdbc:h2:${project.build.directory}/earth</datasource.url>
-	</properties>
 
 	<build>
 		<plugins>
