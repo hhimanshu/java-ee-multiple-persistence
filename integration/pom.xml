@@ -18,6 +18,8 @@
 		<h2.driver>org.h2.Driver</h2.driver>
 		<datasource.url>jdbc:h2:${project.build.directory}/earth</datasource.url>
 		<maven-failsafe-plugin.version>2.12</maven-failsafe-plugin.version>
+		<resteasy-client.version>3.0.8.Final</resteasy-client.version>
+		<jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
 	</properties>
 
 	<dependencies>
@@ -58,6 +60,18 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-client</artifactId>
+			<version>${resteasy-client.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${jackson-mapper-asl.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -113,6 +127,8 @@
 							<properties>
 								<context>earth</context>
 							</properties>
+							<pingURL>http://localhost:9090/earth/rest/hello</pingURL>
+							<pingTimeout>36000</pingTimeout>
 						</deployable>
 					</deployables>
 				</configuration>
