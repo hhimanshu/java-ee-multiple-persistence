@@ -31,9 +31,13 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
 	<properties>
 		<maven.cargo.version>1.4.8</maven.cargo.version>
 		<datasource.jndi>java:/jdbc/EarthDS</datasource.jndi>
+		<h2.user>sa</h2.user>
+		<h2.driver>org.h2.Driver</h2.driver>
+		<datasource.url>jdbc:h2:${project.build.directory}/earth</datasource.url>
 	</properties>
 
 	<build>
@@ -55,22 +59,12 @@
 					<configuration>
 						<properties>
 							<cargo.servlet.port>9090</cargo.servlet.port>
-							<!--<properties>
-								<cargo.datasource.datasource.derby>
-									cargo.datasource.driver=org.apache.derby.jdbc.EmbeddedDriver|
-									cargo.datasource.url=jdbc:derby:earth;create=true|
-									cargo.datasource.jndi=jdbc/EarthDS|
-									cargo.datasource.username=APP|
-									cargo.datasource.password=nonemptypassword
-								</cargo.datasource.datasource.derby>
-							</properties>-->
-
 							<cargo.datasource.datasource.earth>
-								cargo.datasource.driver=org.h2.Driver|
-								cargo.datasource.url=jdbc:h2:~/earth|
+								cargo.datasource.driver=${h2.driver}|
+								cargo.datasource.url=${datasource.url}|
 								cargo.datasource.jndi=${datasource.jndi}|
-								cargo.datasource.username=sa|
-								cargo.datasource.password=sa
+								cargo.datasource.username=${h2.user}|
+								cargo.datasource.password=${h2.user}
 							</cargo.datasource.datasource.earth>
 						</properties>
 					</configuration>
