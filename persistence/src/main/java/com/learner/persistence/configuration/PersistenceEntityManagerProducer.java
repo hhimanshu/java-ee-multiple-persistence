@@ -4,12 +4,12 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceUnit;
+import javax.persistence.PersistenceContext;
 
 @Startup
 @Singleton
 public class PersistenceEntityManagerProducer {
-	@PersistenceUnit(unitName = "earth")
+	@PersistenceContext(unitName = "earth")
 	private EntityManager entityManager;
 
 	@Produces

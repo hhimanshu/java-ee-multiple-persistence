@@ -33,6 +33,7 @@
 	</dependencies>
 	<properties>
 		<maven.cargo.version>1.4.8</maven.cargo.version>
+		<datasource.jndi>java:/jdbc/EarthDS</datasource.jndi>
 	</properties>
 
 	<build>
@@ -63,16 +64,14 @@
 									cargo.datasource.password=nonemptypassword
 								</cargo.datasource.datasource.derby>
 							</properties>-->
-							<properties>
 
-								<cargo.datasource.datasource.h2>
-									cargo.datasource.driver=org.h2.jdbcx.JdbcDataSource|
-									cargo.datasource.url=jdbc:h2:earth|
-									cargo.datasource.jndi=jdbc/EarthDS|
-									cargo.datasource.username=sa|
-									cargo.datasource.password=sa
-								</cargo.datasource.datasource.h2>
-							</properties>
+							<cargo.datasource.datasource.earth>
+								cargo.datasource.driver=org.h2.Driver|
+								cargo.datasource.url=jdbc:h2:~/earth|
+								cargo.datasource.jndi=${datasource.jndi}|
+								cargo.datasource.username=sa|
+								cargo.datasource.password=sa
+							</cargo.datasource.datasource.earth>
 						</properties>
 					</configuration>
 					<deployables>
