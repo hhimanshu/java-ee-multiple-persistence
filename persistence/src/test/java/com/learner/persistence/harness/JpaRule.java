@@ -86,4 +86,9 @@ public class JpaRule extends ExternalResource {
 			transaction.commit();
 		}
 	}
+
+	@Nonnull
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
 }

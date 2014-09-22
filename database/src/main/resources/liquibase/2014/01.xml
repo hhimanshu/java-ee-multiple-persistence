@@ -1,0 +1,14 @@
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	<changeSet author="harit" id="09222014.0639">
+		<comment>Add Person Table</comment>
+		<createTable tableName="person">
+			<column name="id" type="INT"/>
+			<column name="firstName" type="varchar(255)"/>
+			<column name="lastName" type="varchar(255)"/>
+		</createTable>
+	</changeSet>
+</databaseChangeLog>

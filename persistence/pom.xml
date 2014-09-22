@@ -14,8 +14,7 @@
 	<properties>
 		<hibernate-jpa-2.0-api.version>1.0.1.Final</hibernate-jpa-2.0-api.version>
 		<hibernate-core.version>4.3.6.Final</hibernate-core.version>
-		<junit.version>4.11</junit.version>
-		<hibernate-entitymanager.version>4.3.6.Final</hibernate-entitymanager.version>
+		<maven-jar-plugin.version>2.2</maven-jar-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -33,7 +32,6 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>${hibernate-entitymanager.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -43,7 +41,23 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${maven-jar-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>
