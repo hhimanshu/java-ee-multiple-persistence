@@ -1,0 +1,34 @@
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	<changeSet author="harit" id="09222014.0844">
+		<comment>Add Person Table</comment>
+		<insert tableName="person">
+			<column name="id" valueNumeric="1"/>
+			<column name="firstName" value="John"/>
+			<column name="lastName" value="Doe"/>
+		</insert>
+		<insert tableName="person">
+			<column name="id" valueNumeric="2"/>
+			<column name="firstName" value="Tony"/>
+			<column name="lastName" value="Shark"/>
+		</insert>
+		<insert tableName="person">
+			<column name="id" valueNumeric="3"/>
+			<column name="firstName" value="Rocky"/>
+			<column name="lastName" value="Balboa"/>
+		</insert>
+		<insert tableName="person">
+			<column name="id" valueNumeric="4"/>
+			<column name="firstName" value="Agent"/>
+			<column name="lastName" value="Sean"/>
+		</insert>
+		<insert tableName="person">
+			<column name="id" valueNumeric="5"/>
+			<column name="firstName" value="James"/>
+			<column name="lastName" value="Bond"/>
+		</insert>
+	</changeSet>
+</databaseChangeLog>
