@@ -10,10 +10,10 @@
 	<version>1.0-SNAPSHOT</version>
 	<modules>
 		<module>persistence</module>
-		<module>services</module>
-		<module>business</module>
-		<module>integration</module>
 		<module>database</module>
+		<module>business</module>
+		<module>services</module>
+		<module>integration</module>
 	</modules>
 	<dependencyManagement>
 		<dependencies>

@@ -17,6 +17,7 @@
 		<h2.user>sa</h2.user>
 		<h2.driver>org.h2.Driver</h2.driver>
 		<datasource.url>jdbc:h2:${project.build.directory}/earth</datasource.url>
+		<maven-failsafe-plugin.version>2.12</maven-failsafe-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -30,10 +31,29 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>${maven-failsafe-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+						<phase>integration-test</phase>
+					</execution>
+				</executions>
+			</plugin>
+
 			<plugin>
 				<groupId>org.codehaus.cargo</groupId>
 				<artifactId>cargo-maven2-plugin</artifactId>

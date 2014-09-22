@@ -24,7 +24,11 @@ public class DataSetupTest {
 	public JpaRule jpaRule = new JpaRule("unit-testing-pu");
 
 	@Test
-	public void runLiquibaseUpdate() throws LiquibaseException, SQLException {
+	public void testDataSetup() throws SQLException, LiquibaseException {
+		runLiquibaseUpdate(jpaRule);
+	}
+
+	public static void runLiquibaseUpdate(@Nonnull final JpaRule jpaRule) throws LiquibaseException, SQLException {
 		final Liquibase liquibase = new Liquibase("liquibase/changelog.xml",
 				new ClassLoaderResourceAccessor(),
 				new JdbcConnection(getConnection(jpaRule.getEntityManager())));
