@@ -35,6 +35,31 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.learner</groupId>
+			<artifactId>persistence</artifactId>
+			<version>${project.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.learner</groupId>
+			<artifactId>database</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.learner</groupId>
+			<artifactId>database</artifactId>
+			<version>${project.version}</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -61,9 +86,9 @@
 				<configuration>
 					<container>
 						<containerId>wildfly8x</containerId>
-						<dependencies>
-						<dependency>
-								<groupId>com.h2database</groupId>
+						<dependencies combine.children="append">
+							<dependency>
+							<groupId>com.h2database</groupId>
 								<artifactId>h2</artifactId>
 							</dependency>
 						</dependencies>
