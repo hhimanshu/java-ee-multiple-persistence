@@ -8,6 +8,9 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import com.mysema.query.jpa.impl.JPAQuery;
+import com.mysema.query.types.EntityPath;
+
 @Stateless
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class CrudService {
@@ -43,5 +46,11 @@ public class CrudService {
 
 	public <T> void delete(@Nonnull final T entity) {
 		entityManager.remove(entity);
+	}
+
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
+	@Nonnull
+	public JPAQuery query(@Nonnull final EntityPath<?>... args) {
+		return new JPAQuery(entityManager).from(args);
 	}
 }

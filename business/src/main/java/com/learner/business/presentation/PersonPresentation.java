@@ -2,7 +2,7 @@ package com.learner.business.presentation;
 
 import javax.annotation.Nonnull;
 
-import com.learner.persistence.Person;
+import com.learner.persistence.entities.Person;
 
 public class PersonPresentation {
 	private String firstName;

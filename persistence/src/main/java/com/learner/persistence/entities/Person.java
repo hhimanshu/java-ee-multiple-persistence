@@ -1,4 +1,4 @@
-package com.learner.persistence;
+package com.learner.persistence.entities;
 
 import javax.annotation.Nonnull;
 import javax.persistence.Entity;

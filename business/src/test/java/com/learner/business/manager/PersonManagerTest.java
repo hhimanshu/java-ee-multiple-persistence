@@ -11,8 +11,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.learner.business.presentation.PersonPresentation;
-import com.learner.persistence.Person;
 import com.learner.persistence.configuration.CrudService;
+import com.learner.persistence.entities.Person;
 
 public class PersonManagerTest {
 
