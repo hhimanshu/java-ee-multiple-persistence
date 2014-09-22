@@ -49,8 +49,8 @@
 				<configuration>
 					<container>
 						<containerId>wildfly8x</containerId>
-						<dependencies combine.children="append">
-							<dependency>
+						<dependencies>
+						<dependency>
 								<groupId>com.h2database</groupId>
 								<artifactId>h2</artifactId>
 							</dependency>
@@ -98,5 +98,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
