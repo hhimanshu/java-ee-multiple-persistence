@@ -1,5 +1,8 @@
 package com.learner.business.presentation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Nonnull;
 
 import com.learner.persistence.entities.Person;
@@ -31,5 +34,14 @@ public class PersonPresentation {
 
 	public static PersonPresentation toPersonPresentation(@Nonnull final Person person) {
 		return new PersonPresentation(person.getFirstName(), person.getLastName());
+	}
+
+	@Nonnull
+	public static List<PersonPresentation> toPersonPresentations(@Nonnull final List<Person> persons) {
+		final List<PersonPresentation> personPresentations = new ArrayList<>();
+		for (final Person person : persons) {
+			personPresentations.add(new PersonPresentation(person.getFirstName(), person.getLastName()));
+		}
+		return personPresentations;
 	}
 }

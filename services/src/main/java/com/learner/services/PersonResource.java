@@ -3,6 +3,7 @@ package com.learner.services;
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -32,5 +33,11 @@ public class PersonResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addPerson(@Nonnull final PersonPresentation personPresentation) {
 		return Response.ok(personManager.addPerson(personPresentation)).status(Response.Status.CREATED).build();
+	}
+
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getPersons() {
+		return Response.ok(personManager.getPersons()).build();
 	}
 }
