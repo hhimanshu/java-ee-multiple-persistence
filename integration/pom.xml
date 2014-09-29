@@ -10,16 +10,18 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>integration</artifactId>
+	<packaging>war</packaging>
 
 	<properties>
 		<maven.cargo.version>1.4.8</maven.cargo.version>
 		<datasource.jndi>java:/jdbc/EarthDS</datasource.jndi>
-		<h2.user>sa</h2.user>
-		<h2.driver>org.h2.Driver</h2.driver>
-		<datasource.url>jdbc:h2:${project.build.directory}/earth</datasource.url>
 		<maven-failsafe-plugin.version>2.12</maven-failsafe-plugin.version>
 		<resteasy-client.version>3.0.8.Final</resteasy-client.version>
 		<jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
+		<maven-war-plugin.version>2.4</maven-war-plugin.version>
+		<derby.port>1527</derby.port>
+		<datasource.user>APP</datasource.user>
+		<datasource.password>nonemptypassword</datasource.password>
 	</properties>
 
 	<dependencies>
@@ -27,11 +29,6 @@
 			<groupId>com.learner</groupId>
 			<artifactId>services</artifactId>
 			<version>${project.version}</version>
-			<type>war</type>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -63,7 +60,26 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.jboss.resteasy</groupId>
+			<groupId>org.jboss.spec.javax.transaction</groupId>
+			<artifactId>jboss-transaction-api_1.1_spec</artifactId>
+			<version>1.0.1.Final</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<version>1.2</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+		<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-client</artifactId>
 			<version>${resteasy-client.version}</version>
 			<scope>test</scope>
@@ -74,21 +90,104 @@
 			<version>${jackson-mapper-asl.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<version>10.11.1.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derbyclient</artifactId>
+			<version>10.11.1.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>4.3.6.Final</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
+
 
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>${maven-failsafe-plugin.version}</version>
+				<groupId>org.carlspring.maven</groupId>
+				<artifactId>derby-maven-plugin</artifactId>
+				<version>1.8</version>
+				<configuration>
+					<port>${derby.port}</port>
+				</configuration>
 				<executions>
 					<execution>
+						<id>start-derby</id>
+						<goals>
+							<goal>start</goal>
+						</goals>
+						<phase>pre-integration-test</phase>
+					</execution>
+					<execution>
+						<id>stop-derby</id>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+						<phase>post-integration-test</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+					<includes>
+						<include>**/*.java</include>
+					</includes>
+					<groups>
+						com.learner.persistence.harness.PreIntegration
+					</groups>
+					<excludedGroups>
+						com.learner.persistence.harness.Integration
+					</excludedGroups>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${maven-war-plugin.version}</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+					<includes>
+						<include>**/*.java</include>
+					</includes>
+					<groups>
+						com.learner.persistence.harness.Integration
+					</groups>
+					<excludedGroups>
+						com.learner.persistence.harness.PreIntegration
+					</excludedGroups>
+				</configuration>
+				<executions>
+					<execution>
+						<id>integration-test</id>
 						<goals>
 							<goal>integration-test</goal>
-							<goal>verify</goal>
 						</goals>
-						<phase>integration-test</phase>
+					</execution>
+					<execution>
+						<id>verify</id>
+						<goals>
+						<goal>verify</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>
@@ -102,28 +201,33 @@
 						<containerId>wildfly8x</containerId>
 						<dependencies combine.children="append">
 							<dependency>
-							<groupId>com.h2database</groupId>
-								<artifactId>h2</artifactId>
+								<groupId>org.apache.derby</groupId>
+								<artifactId>derby</artifactId>
+							</dependency>
+							<dependency>
+								<groupId>org.apache.derby</groupId>
+								<artifactId>derbyclient</artifactId>
 							</dependency>
 						</dependencies>
+						<systemProperties combine.children="append">
+							<hibernate.dialect>org.hibernate.dialect.DerbyTenSevenDialect
+							</hibernate.dialect>
+						</systemProperties>
 					</container>
 					<configuration>
 						<properties>
 							<cargo.servlet.port>9090</cargo.servlet.port>
-							<cargo.datasource.datasource.earth>
-								cargo.datasource.driver=${h2.driver}|
-								cargo.datasource.url=${datasource.url}|
+							<cargo.datasource.datasource.derby>
+								cargo.datasource.driver=org.apache.derby.jdbc.ClientDriver|
+								cargo.datasource.url=jdbc:derby://localhost:${derby.port}/integrationDB;create=true|
 								cargo.datasource.jndi=${datasource.jndi}|
-								cargo.datasource.username=${h2.user}|
-								cargo.datasource.password=${h2.user}
-							</cargo.datasource.datasource.earth>
+								cargo.datasource.username=${datasource.user}|
+								cargo.datasource.password=${datasource.password}
+							</cargo.datasource.datasource.derby>
 						</properties>
 					</configuration>
 					<deployables>
 						<deployable>
-							<groupId>com.learner</groupId>
-							<artifactId>services</artifactId>
-							<type>war</type>
 							<properties>
 								<context>earth</context>
 							</properties>

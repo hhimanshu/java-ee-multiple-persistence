@@ -17,6 +17,16 @@ public class H2Memory implements DataSourceDefinition {
 		this.database = database;
 	}
 
+	@Override
+	public void before() {
+
+	}
+
+	@Override
+	public void after() {
+
+	}
+
 	@Nonnull
 	@Override
 	public Map<String, String> getPersistenceProperties() {

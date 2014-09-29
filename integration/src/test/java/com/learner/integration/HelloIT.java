@@ -13,7 +13,11 @@ import javax.ws.rs.core.Response;
 import org.apache.http.HttpStatus;
 import org.codehaus.jackson.JsonNode;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
+import com.learner.persistence.harness.Integration;
+
+@Category(Integration.class)
 public class HelloIT extends AbstractIntegrationTest {
 
 	@Test

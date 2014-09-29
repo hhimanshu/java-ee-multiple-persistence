@@ -12,9 +12,19 @@ import javax.ws.rs.core.Response;
 
 import org.apache.http.HttpStatus;
 import org.codehaus.jackson.JsonNode;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
+import com.learner.persistence.harness.Integration;
+import com.learner.persistence.harness.JpaRule;
+
+@Category(Integration.class)
 public class PersonsIT extends AbstractIntegrationTest {
+
+	@Rule
+	public final JpaRule jpaRule = new JpaRule(JpaRule.Derby.client, "unit-testing-pu");
+
 
 	@Test
 	public void testGetPersons() throws IOException {

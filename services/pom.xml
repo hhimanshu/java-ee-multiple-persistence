@@ -10,12 +10,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>services</artifactId>
-	<packaging>war</packaging>
 
 	<properties>
 		<jaxrs-api.version>3.0.8.Final</jaxrs-api.version>
 		<resteasy-jaxrs.version>3.0.8.Final</resteasy-jaxrs.version>
-		<maven-war-plugin.version>2.4</maven-war-plugin.version>
 		<jackson.version>1.9.13</jackson.version>
 	</properties>
 
@@ -58,16 +56,5 @@
 		</dependency>
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>${maven-war-plugin.version}</version>
-				<configuration>
-					<failOnMissingWebXml>false</failOnMissingWebXml>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+
 </project>
