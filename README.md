@@ -10,6 +10,6 @@ It uses [H2 Database](http://www.h2database.com/html/main.html) in 2 modes
 
 ######  Technologies used ######
 - [Java 8](http://docs.oracle.com/javase/8/docs/api/)
-- [Liquibase](liquibase.org)
+- [Liquibase](http://www.liquibase.org/)
 - [Java EE 7](http://docs.oracle.com/javaee/7/tutorial/doc/home.htm)
 - [H2 Database](http://www.h2database.com/html/main.html)
