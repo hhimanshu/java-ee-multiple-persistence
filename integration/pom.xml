@@ -17,7 +17,8 @@
 		<datasource.jndi>java:/jdbc/EarthDS</datasource.jndi>
 		<h2.user>sa</h2.user>
 		<h2.driver>org.h2.Driver</h2.driver>
-		<datasource.url>jdbc:h2:file:${project.build.directory}/integrationDB</datasource.url>
+		<!--<datasource.url>jdbc:h2:file:${project.build.directory}/integrationDB</datasource.url>-->
+		<datasource.url>jdbc:h2:tcp://localhost/~/integrationDB</datasource.url>
 		<maven-failsafe-plugin.version>2.12</maven-failsafe-plugin.version>
 		<resteasy-client.version>3.0.8.Final</resteasy-client.version>
 		<jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>

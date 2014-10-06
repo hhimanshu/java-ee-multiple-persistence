@@ -38,7 +38,7 @@ public class JpaRule extends ExternalResource {
 		/**
 		 * Connects to a remote instance of derby.
 		 */
-		public static final DataSourceDefinition client = new DerbyClient();
+		public static final DataSourceDefinition client = new H2Client();
 	}
 
 	/**
