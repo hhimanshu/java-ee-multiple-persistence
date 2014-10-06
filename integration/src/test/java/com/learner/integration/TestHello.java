@@ -18,7 +18,7 @@ import org.junit.experimental.categories.Category;
 import com.learner.persistence.harness.Integration;
 
 @Category(Integration.class)
-public class HelloIT extends AbstractIntegrationTest {
+public class TestHello extends AbstractIntegrationTest {
 
 	@Test
 	public void testGetHello() throws IOException {

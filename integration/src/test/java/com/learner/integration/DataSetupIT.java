@@ -12,7 +12,7 @@ import com.learner.persistence.harness.PreIntegration;
 import liquibase.exception.LiquibaseException;
 
 @Category(PreIntegration.class)
-public class DataSetup {
+public class DataSetupIT {
 	@Rule
 	public final JpaRule jpaRule = new JpaRule(JpaRule.Derby.directory, "unit-testing-pu");
 

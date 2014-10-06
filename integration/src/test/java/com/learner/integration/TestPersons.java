@@ -20,7 +20,7 @@ import com.learner.persistence.harness.Integration;
 import com.learner.persistence.harness.JpaRule;
 
 @Category(Integration.class)
-public class PersonsIT extends AbstractIntegrationTest {
+public class TestPersons extends AbstractIntegrationTest {
 
 	@Rule
 	public final JpaRule jpaRule = new JpaRule(JpaRule.Derby.client, "unit-testing-pu");

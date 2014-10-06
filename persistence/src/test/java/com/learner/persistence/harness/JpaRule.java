@@ -34,7 +34,7 @@ public class JpaRule extends ExternalResource {
 		/**
 		 * Starts and connects to an embedded instance of derby that persists to the file system.
 		 */
-		public static final DataSourceDefinition directory = new DerbyDirectory();
+		public static final DataSourceDefinition directory = new H2Directory();
 		/**
 		 * Connects to a remote instance of derby.
 		 */

@@ -15,6 +15,9 @@
 	<properties>
 		<maven.cargo.version>1.4.8</maven.cargo.version>
 		<datasource.jndi>java:/jdbc/EarthDS</datasource.jndi>
+		<h2.user>sa</h2.user>
+		<h2.driver>org.h2.Driver</h2.driver>
+		<datasource.url>jdbc:h2:file:${project.build.directory}/integrationDB</datasource.url>
 		<maven-failsafe-plugin.version>2.12</maven-failsafe-plugin.version>
 		<resteasy-client.version>3.0.8.Final</resteasy-client.version>
 		<jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
@@ -79,7 +82,7 @@
 		</dependency>
 
 		<dependency>
-		<groupId>org.jboss.resteasy</groupId>
+			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-client</artifactId>
 			<version>${resteasy-client.version}</version>
 			<scope>test</scope>
@@ -107,6 +110,11 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>4.3.6.Final</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.181</version>
 		</dependency>
 	</dependencies>
 
@@ -137,22 +145,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.17</version>
-				<configuration>
-					<includes>
-						<include>**/*.java</include>
-					</includes>
-					<groups>
-						com.learner.persistence.harness.PreIntegration
-					</groups>
-					<excludedGroups>
-						com.learner.persistence.harness.Integration
-					</excludedGroups>
-				</configuration>
-			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
@@ -161,37 +154,6 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.17</version>
-				<configuration>
-					<includes>
-						<include>**/*.java</include>
-					</includes>
-					<groups>
-						com.learner.persistence.harness.Integration
-					</groups>
-					<excludedGroups>
-						com.learner.persistence.harness.PreIntegration
-					</excludedGroups>
-				</configuration>
-				<executions>
-					<execution>
-						<id>integration-test</id>
-						<goals>
-							<goal>integration-test</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>verify</id>
-						<goals>
-						<goal>verify</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
 			<plugin>
 				<groupId>org.codehaus.cargo</groupId>
 				<artifactId>cargo-maven2-plugin</artifactId>
@@ -208,6 +170,10 @@
 								<groupId>org.apache.derby</groupId>
 								<artifactId>derbyclient</artifactId>
 							</dependency>
+							<dependency>
+								<groupId>com.h2database</groupId>
+								<artifactId>h2</artifactId>
+							</dependency>
 						</dependencies>
 						<systemProperties combine.children="append">
 							<hibernate.dialect>org.hibernate.dialect.DerbyTenSevenDialect
@@ -217,13 +183,13 @@
 					<configuration>
 						<properties>
 							<cargo.servlet.port>9090</cargo.servlet.port>
-							<cargo.datasource.datasource.derby>
-								cargo.datasource.driver=org.apache.derby.jdbc.ClientDriver|
-								cargo.datasource.url=jdbc:derby://localhost:${derby.port}/integrationDB;create=true|
+							<cargo.datasource.datasource.h2>
+								cargo.datasource.driver=${h2.driver}|
+								cargo.datasource.url=${datasource.url}|
 								cargo.datasource.jndi=${datasource.jndi}|
-								cargo.datasource.username=${datasource.user}|
-								cargo.datasource.password=${datasource.password}
-							</cargo.datasource.datasource.derby>
+								cargo.datasource.username=${h2.user}|
+								cargo.datasource.password=${h2.user}
+							</cargo.datasource.datasource.h2>
 						</properties>
 					</configuration>
 					<deployables>
@@ -252,6 +218,53 @@
 						<phase>post-integration-test</phase>
 					</execution>
 				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+					<includes>
+						<include>**/*.java</include>
+					</includes>
+					<groups>
+						com.learner.persistence.harness.Integration
+					</groups>
+					<excludedGroups>
+						com.learner.persistence.harness.PreIntegration
+					</excludedGroups>
+				</configuration>
+				<executions>
+					<execution>
+						<id>integration-test</id>
+						<goals>
+							<goal>integration-test</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>verify</id>
+						<goals>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+					<includes>
+						<include>**/*.java</include>
+					</includes>
+					<groups>
+						com.learner.persistence.harness.PreIntegration
+					</groups>
+					<excludedGroups>
+						com.learner.persistence.harness.Integration
+					</excludedGroups>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
