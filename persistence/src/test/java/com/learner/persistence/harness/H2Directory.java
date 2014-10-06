@@ -40,5 +40,4 @@ public class H2Directory implements DataSourceDefinition {
 		map.put(JAVAX_PERSISTENCE_JDBC_PASSWORD, "sa");
 		return map;
 	}
-
 }
