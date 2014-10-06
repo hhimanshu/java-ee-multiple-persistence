@@ -23,7 +23,7 @@ import com.learner.persistence.harness.JpaRule;
 public class TestPersons extends AbstractIntegrationTest {
 
 	@Rule
-	public final JpaRule jpaRule = new JpaRule(JpaRule.Derby.client, "unit-testing-pu");
+	public final JpaRule jpaRule = new JpaRule(JpaRule.Derby.directory, "unit-testing-pu");
 
 
 	@Test
