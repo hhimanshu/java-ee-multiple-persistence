@@ -6,6 +6,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
+import com.learner.database.DataSetupTest;
 import com.learner.persistence.harness.JpaRule;
 import com.learner.persistence.harness.PreIntegration;
 
@@ -18,7 +19,8 @@ public class DataSetupIT {
 
 	@Test
 	public void setupData() throws SQLException, LiquibaseException {
+		// (todo: harit) better logging
 		System.out.println("Setting up IT Database");
-		com.learner.database.DataSetupTest.runLiquibaseUpdate(jpaRule);
+		DataSetupTest.runLiquibaseUpdate(jpaRule);
 	}
 }

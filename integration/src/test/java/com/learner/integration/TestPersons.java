@@ -10,7 +10,6 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.apache.http.HttpStatus;
 import org.codehaus.jackson.JsonNode;
 import org.junit.Rule;
 import org.junit.Test;
@@ -33,7 +32,7 @@ public class TestPersons extends AbstractIntegrationTest {
 		final Response response = webTarget
 				.request(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON).get();
-		assertStatus(HttpStatus.SC_OK, response);
+		assertStatus(Response.Status.OK.getStatusCode(), response);
 		final JsonNode responsePayload = parseResponse(response);
 		assertEquals(5, responsePayload.size());
 	}
