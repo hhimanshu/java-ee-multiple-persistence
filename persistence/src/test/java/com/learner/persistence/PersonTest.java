@@ -22,7 +22,7 @@ public class PersonTest {
 
 	@Before
 	public void setUp() {
-		crudService = jpaRule.createCrudService();
+		crudService = jpaRule.createCrudService(CrudService.class);
 	}
 
 	@Test

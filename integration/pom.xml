@@ -10,16 +10,19 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>integration</artifactId>
+	<packaging>war</packaging>
 
 	<properties>
 		<maven.cargo.version>1.4.8</maven.cargo.version>
 		<datasource.jndi>java:/jdbc/EarthDS</datasource.jndi>
 		<h2.user>sa</h2.user>
 		<h2.driver>org.h2.Driver</h2.driver>
-		<datasource.url>jdbc:h2:${project.build.directory}/earth</datasource.url>
+		<datasource.url>jdbc:h2:file:${project.build.directory}/integrationDB;AUTO_SERVER=TRUE</datasource.url>
 		<maven-failsafe-plugin.version>2.12</maven-failsafe-plugin.version>
 		<resteasy-client.version>3.0.8.Final</resteasy-client.version>
 		<jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
+		<maven-war-plugin.version>2.4</maven-war-plugin.version>
+		<h2.db.version>1.4.181</h2.db.version>
 	</properties>
 
 	<dependencies>
@@ -27,11 +30,6 @@
 			<groupId>com.learner</groupId>
 			<artifactId>services</artifactId>
 			<version>${project.version}</version>
-			<type>war</type>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -74,25 +72,23 @@
 			<version>${jackson-mapper-asl.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2.db.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>${maven-failsafe-plugin.version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
-						</goals>
-						<phase>integration-test</phase>
-					</execution>
-				</executions>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${maven-war-plugin.version}</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.codehaus.cargo</groupId>
 				<artifactId>cargo-maven2-plugin</artifactId>
@@ -102,7 +98,7 @@
 						<containerId>wildfly8x</containerId>
 						<dependencies combine.children="append">
 							<dependency>
-							<groupId>com.h2database</groupId>
+								<groupId>com.h2database</groupId>
 								<artifactId>h2</artifactId>
 							</dependency>
 						</dependencies>
@@ -110,20 +106,17 @@
 					<configuration>
 						<properties>
 							<cargo.servlet.port>9090</cargo.servlet.port>
-							<cargo.datasource.datasource.earth>
+							<cargo.datasource.datasource.h2>
 								cargo.datasource.driver=${h2.driver}|
 								cargo.datasource.url=${datasource.url}|
 								cargo.datasource.jndi=${datasource.jndi}|
 								cargo.datasource.username=${h2.user}|
 								cargo.datasource.password=${h2.user}
-							</cargo.datasource.datasource.earth>
+							</cargo.datasource.datasource.h2>
 						</properties>
 					</configuration>
 					<deployables>
 						<deployable>
-							<groupId>com.learner</groupId>
-							<artifactId>services</artifactId>
-							<type>war</type>
 							<properties>
 								<context>earth</context>
 							</properties>
@@ -148,6 +141,52 @@
 						<phase>post-integration-test</phase>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+					<includes>
+						<include>**/*.java</include>
+					</includes>
+					<groups>
+						com.learner.persistence.harness.Integration
+					</groups>
+					<excludedGroups>
+						com.learner.persistence.harness.PreIntegration
+					</excludedGroups>
+				</configuration>
+				<executions>
+					<execution>
+						<id>integration-test</id>
+						<goals>
+							<goal>integration-test</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>verify</id>
+						<goals>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.17</version>
+				<configuration>
+					<includes>
+						<include>**/*.java</include>
+					</includes>
+					<groups>
+						com.learner.persistence.harness.PreIntegration
+					</groups>
+					<excludedGroups>
+						com.learner.persistence.harness.Integration
+					</excludedGroups>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
