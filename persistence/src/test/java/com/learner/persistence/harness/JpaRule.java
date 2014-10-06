@@ -29,16 +29,11 @@ public class JpaRule extends ExternalResource {
 		/**
 		 * Starts and connects to an in-memory embedded instance of derby
 		 */
-		// (todo: harit) change this to Derby?
 		public static final DataSourceDefinition memory = new H2Memory();
 		/**
 		 * Starts and connects to an embedded instance of derby that persists to the file system.
 		 */
 		public static final DataSourceDefinition directory = new H2Directory();
-		/**
-		 * Connects to a remote instance of derby.
-		 */
-		public static final DataSourceDefinition client = new H2Client();
 	}
 
 	/**
@@ -63,8 +58,8 @@ public class JpaRule extends ExternalResource {
 	}
 
 	/**
-	 * Closes the transaction, if there is an open transaction, then opens a new transaction. Use this to ensure that entities a
-	 * really flushed down to the sql layer. This can catch serialization/validation issues...
+	 * Closes the transaction, if there is an open transaction, then opens a new transaction. Use this to ensure that
+	 * entities a really flushed down to the sql layer. This can catch serialization/validation issues...
 	 */
 	public void changeTransaction() {
 		commitOrRollbackTransaction();
