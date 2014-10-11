@@ -18,6 +18,7 @@
 		<querydsl.version>3.4.3</querydsl.version>
 		<guava.version>18.0</guava.version>
 		<slf4j-log4j12.version>1.6.1</slf4j-log4j12.version>
+		<maven-apt-plugin.version>0.3.2</maven-apt-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -79,19 +80,6 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derby</artifactId>
-			<version>10.11.1.1</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.derby</groupId>
-			<artifactId>derbyclient</artifactId>
-			<version>10.11.1.1</version>
-			<scope>test</scope>
-		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -111,7 +99,7 @@
 			<plugin>
 				<groupId>com.mysema.maven</groupId>
 				<artifactId>maven-apt-plugin</artifactId>
-				<version>0.3.2</version>
+				<version>${maven-apt-plugin.version}</version>
 				<executions>
 					<execution>
 						<goals>
