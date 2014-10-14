@@ -1,28 +1,26 @@
 package com.learner.integration;
 
-import static org.junit.Assert.assertEquals;
-
-import java.io.IOException;
+import com.learner.persistence.harness.Integration;
+import com.learner.persistence.harness.JpaRule;
+import org.codehaus.jackson.JsonNode;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.IOException;
 
-import org.codehaus.jackson.JsonNode;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.experimental.categories.Category;
-
-import com.learner.persistence.harness.Integration;
-import com.learner.persistence.harness.JpaRule;
+import static org.junit.Assert.assertEquals;
 
 @Category(Integration.class)
 public class TestPersons extends AbstractIntegrationTest {
 
 	@Rule
-	public final JpaRule jpaRule = new JpaRule(JpaRule.Derby.directory, "unit-testing-pu");
+    public final JpaRule jpaRule = new JpaRule(JpaRule.H2.directory, "unit-testing-pu");
 
 
 	@Test
